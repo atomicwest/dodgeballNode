@@ -1,0 +1,17 @@
+{
+  "name": "dodgeball_test",
+  "version": "1.0.0",
+  "description": "simple dodgeball game for demonstrating MongoDB-driven leaderboards",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jesson Go",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.16.0",
+    "ejs": "^2.5.5",
+    "express": "^4.14.0",
+    "mongoose": "^4.7.8"
+  }
+}
