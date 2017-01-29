@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Hall of Fame</title>
+        <% include partials/mainSJ.ejs %>
+        
+    </head>
+    
+    
+    <% include partials/nav.ejs %>
+    <body>
+        <ul>
+            <% for(var i=0; i<scores ; i++){ %>
+                <li class="entry"><%= scores[i] %></li>
+            <% }; %>
+        </ul>
+    </body>
+    
+</html>
