@@ -1,4 +1,4 @@
-var gamepieceA, score=0, comets=[];
+var gamepieceA, score=0, dodgeballs=[];
 
 
 function avatar(width, height, color, x, y, vx=0, vy=0){
@@ -65,23 +65,6 @@ var gameArea = {
         this.interval = setInterval(updateGameArea, 20);
         this.frameNum = 0;
 
-        // this.canvas.addEventListener('mousemove', function(e){
-            
-        //     var $cvs = $("#gamecanvas");
-        //     var offset = $cvs.offset();
-        //     var width = $cvs.width();
-        //     var height = $cvs.height();
-            
-        //     var centerX = offset.left - width / 2;
-        //     var centerY = offset.top - height / 2;
-            
-        //     gameArea.x = e.pageX + centerX;
-        //     gameArea.y = e.pageY + centerY;
-        //     document.getElementById('test').innerHTML=this.canvas.getBoundingClientRect();
-        //     // gameArea.x = e.clientX - this.canvas.getBoundingClientRect();
-        //     // gameArea.y = e.clientY - this.canvas.getBoundingClientRect();
-        // });
-
         $( document.body ).on( "mousemove", function( event ) {
           gameArea.x = event.clientX - $("#gamecanvas").offset().left;
           gameArea.y = event.clientY - $("#gamecanvas").offset().top;
@@ -105,21 +88,46 @@ var gameArea = {
 //---------------------------------------------------------------------
 
 function endgame() {
+    var date = new Date();
     var canv = document.getElementById("canvasdiv");
     var childgame = document.getElementById("gamecanvas");
     // document.getElementById("test").innerHTML = childgame;
     // canv.removeChild(childgame);
     
     var newform = document.createElement("form");
+    newform.setAttribute("method", "post");
+    newform.setAttribute("action", "/dodgeGame");
     newform.setAttribute("id", "scoresubmit");
     document.getElementById("gameblock").appendChild(newform);
     
     var frmname = document.createElement("input");
+    frmname.setAttribute("type", "text");
     frmname.setAttribute("id", "scorename");
+    frmname.setAttribute("name", "name");
+    frmname.setAttribute("placeholder", "Enter Your Name");
     document.getElementById("scoresubmit").appendChild(frmname);
+
+    var scorefield = document.createElement("input");
+    scorefield.setAttribute("type", "text");
+    scorefield.setAttribute("id", "scorefield");
+    scorefield.setAttribute("name", "score");
+    scorefield.setAttribute("value", score);
+    scorefield.setAttribute("readonly", "readonly");
+    document.getElementById("scoresubmit").appendChild(scorefield);
+    
+    var datefield = document.createElement("input");
+    datefield.setAttribute("type", "text");
+    datefield.setAttribute("id", "datefield");
+    datefield.setAttribute("name", "datefield");
+    datefield.setAttribute("value", date.toString());
+    datefield.setAttribute("readonly", "readonly");
+    document.getElementById("scoresubmit").appendChild(datefield);
+    
+   
     
     var subbutton = document.createElement("button");
     subbutton.setAttribute("type", "submit");
+    subbutton.setAttribute("id", "sendscore");
     subbutton.setAttribute("class", "btn btn-secondary");
     subbutton.innerHTML = "Add to Hall of Fame";
     document.getElementById("scoresubmit").appendChild(subbutton);
@@ -168,15 +176,15 @@ function updateGameArea() {
 
     document.getElementById("score").innerHTML = score;
 
-    for(var i=0; i<comets.length; i++){
-        if (gamepieceA.collide(comets[i])) {
+    for(var i=0; i<dodgeballs.length; i++){
+        if (gamepieceA.collide(dodgeballs[i])) {
            gameArea.stop();
            return;
         }
 
-        if ((comets[i].x > gameArea.canvas.width) || (comets[i].y > gameArea.canvas.height)) {
+        if ((dodgeballs[i].x > gameArea.canvas.width) || (dodgeballs[i].y > gameArea.canvas.height)) {
             score+=1;
-            comets.splice(i,1);
+            dodgeballs.splice(i,1);
         }
     }
 
@@ -193,16 +201,16 @@ function updateGameArea() {
         var randvy = randN(-10,10)
         var rcolor = randColor()
         console.log(rcolor)
-        comets.push(new avatar(-1, radius, rcolor, xstart, -20, randvx, randvy))
+        dodgeballs.push(new avatar(-1, radius, rcolor, xstart, -20, randvx, randvy))
     }
 
-    for (var i=0; i < comets.length; i++){
+    for (var i=0; i < dodgeballs.length; i++){
         //use below  for jitter
-        // comets[i].x += randN(2,10)
-        // comets[i].y += randN(2,10)
-        comets[i].x += comets[i].vx;
-        comets[i].y += comets[i].vy;
-        comets[i].update();
+        // dodgeballs[i].x += randN(2,10)
+        // dodgeballs[i].y += randN(2,10)
+        dodgeballs[i].x += dodgeballs[i].vx;
+        dodgeballs[i].y += dodgeballs[i].vy;
+        dodgeballs[i].update();
     }
 
     gamepieceA.x = gameArea.x;
@@ -217,12 +225,6 @@ function updateGameArea() {
 //---------------------------------------------------------------------
 
 function startGame() {
-
-    // for  (var i=0; i<3; i++) {
-    //     countdown(i)
-    // }
-
-    // document.getElementById("test").innerHTML = "Script on html"
 
     gamepieceA = new avatar(-1, 10, randColor(), 0, 0);
 

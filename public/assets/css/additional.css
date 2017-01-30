@@ -2,13 +2,15 @@ h1, h2, #score {
     text-align: center;
 }
 
-canvas {
-    border: 2px solid #909090;
+.center-block, canvas, #homebtn, #scoresubmit {
     padding: 0;
     margin: auto;
     display: block;
 }
 
+canvas {
+    border: 2px solid #909090;
+}
 
 .navul {
     list-style-type: none;

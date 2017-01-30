@@ -9,11 +9,24 @@
     
     <% include partials/nav.ejs %>
     <body>
-        <ul>
-            <% for(var i=0; i<scores ; i++){ %>
-                <li class="entry"><%= scores[i] %></li>
-            <% }; %>
-        </ul>
+        <h2>Leaderboard</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for (var i=0; i<scores.length; i++){ %>
+                    <tr>
+                        <td><%= scores[i].name %></td>
+                        <td><%= scores[i].score %></td>
+                    </tr>
+                <%  }; %>
+            </tbody>
+        </table>
+        
     </body>
     
 </html>
