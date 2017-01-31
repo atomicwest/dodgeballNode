@@ -37,7 +37,7 @@ module.exports = function(app){
             console.log(data);
             if (err) throw err;
             // res.json(data);
-            res.render('dodgeG');
+            res.render('home');
         });
     });
 }

@@ -22,6 +22,16 @@ function randColor(){
     return color
 }
 
+function appendDate(date){
+    var datefield = document.createElement("input");
+    datefield.setAttribute("type", "text");
+    datefield.setAttribute("id", "datefield");
+    datefield.setAttribute("name", "datefield");
+    datefield.setAttribute("value", date.toString());
+    datefield.setAttribute("readonly", "readonly");
+    document.getElementById("scoresubmit").appendChild(datefield);
+}
+
 module.exports = {
     randN : randN,
     atInterval : atInterval,

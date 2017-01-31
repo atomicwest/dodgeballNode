@@ -13,20 +13,20 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Score</th>
+                    <th class="nametable">Name</th>
+                    <th class="scoretable">Score</th>
                 </tr>
             </thead>
             <tbody>
                 <% for (var i=0; i<scores.length; i++){ %>
                     <tr>
-                        <td><%= scores[i].name %></td>
-                        <td><%= scores[i].score %></td>
+                        <td class="nametable"><%= scores[i].name %></td>
+                        <td class="scoretable"><%= scores[i].score %></td>
                     </tr>
                 <%  }; %>
             </tbody>
         </table>
-        
+
     </body>
-    
+    <% include partials/footer.ejs %>
 </html>
